@@ -56,6 +56,7 @@ def parse_config(config_file):
         config['loggly_token'] = parser.get('loggly_log', 'token')
 
     config['mongo_db'] = parser.get('mongodb', 'database')
+    config['mongo_host'] = parser.get('mongodb', 'host')
 
     config['hpf_feeds'] = parser.get('hpfriends', 'channels').split(',')
     config['hpf_ident'] = parser.get('hpfriends', 'ident')
@@ -113,7 +114,7 @@ if __name__ == '__main__':
 
     greenlets = {}
 
-    db = mnemodb.MnemoDB(c['mongo_db'])
+    db = mnemodb.MnemoDB(c['mongo_host'],c['mongo_db'])
 
     webapi = None
     hpfriends_puller = None
